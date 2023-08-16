@@ -6,7 +6,7 @@ node_modules
 .idea
 *.lock
 package-lock.json
-
+backend/key.json
 .env
 
 # Logs
