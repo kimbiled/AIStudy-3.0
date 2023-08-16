@@ -33,7 +33,7 @@ export class UserController {
 	@HttpCode(HttpStatus.OK)
 	@Get("/get-all")
 	@UsePipes(IntPipe)
-	public async getAll(@Query() dto: FilterDto) {
-		return await this.userService.getAll(dto);
+	public async getAll(@Query() filter: FilterDto) {
+		return await this.userService.getAll(filter);
 	}
 }
