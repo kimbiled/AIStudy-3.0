@@ -13,6 +13,9 @@ export class CreateWritingDto {
 
 export class CheckWritingDto {
 	@ApiProperty()
+	readonly writingId: string;
+
+	@ApiProperty()
 	readonly content: string;
 }
 

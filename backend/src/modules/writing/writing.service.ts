@@ -35,6 +35,10 @@ export class WritingService {
 	}
 
 	public async check(dto: CheckWritingDto) {
+		const writing = await this.get({
+			writingId: dto.writingId,
+		});
+
 		return await this.vertexService.chat(dto.content);
 	}
 
