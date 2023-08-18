@@ -1,8 +1,23 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Post, Put, Query } from "@nestjs/common";
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	HttpCode,
+	HttpStatus,
+	Param,
+	Post,
+	Put,
+	Query,
+	UploadedFile,
+	UseInterceptors,
+} from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
 import { SpeakingService } from "@modules/speaking/speaking.service";
 import { CreateSpeakingDto, DeleteSpeakingDto, GetSpeakingDto, UpdateSpeakingDto } from "@modules/speaking/dto";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { FilterDto } from "@root/dto";
 
 @ApiTags("/speaking")
 @Controller("/speaking")
@@ -16,9 +31,16 @@ export class SpeakingController {
 	}
 
 	@HttpCode(HttpStatus.OK)
-	@Get("/get")
-	public async get(@Query() dto: GetSpeakingDto) {
+	@Get("/get/:speakingId")
+	public async get(@Param() dto: GetSpeakingDto) {
+		console.log(dto);
 		return await this.speakingService.get(dto);
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Get("/get")
+	public async getAll(@Query() filter: FilterDto) {
+		return await this.speakingService.getAll(filter);
 	}
 
 	@HttpCode(HttpStatus.OK)
@@ -31,5 +53,12 @@ export class SpeakingController {
 	@Delete("/delete")
 	public async delete(@Body() dto: DeleteSpeakingDto) {
 		return await this.speakingService.delete(dto);
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Post("/check")
+	@UseInterceptors(FileInterceptor("file"))
+	public async check(@UploadedFile() file: Express.Multer.File) {
+		return await this.speakingService.check(file);
 	}
 }

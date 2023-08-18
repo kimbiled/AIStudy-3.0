@@ -2,11 +2,14 @@ import { BadRequestException, Injectable, InternalServerErrorException } from "@
 
 import { PrismaService } from "@modules/prisma/prisma.service";
 
+import { VertexService } from "@api/google/vertex/vertex.service";
+
 import { CreateSpeakingDto, DeleteSpeakingDto, GetSpeakingDto, UpdateSpeakingDto } from "@modules/speaking/dto";
+import { FilterDto } from "@root/dto";
 
 @Injectable()
 export class SpeakingService {
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: PrismaService, private readonly vertexService: VertexService) {}
 
 	public async create(dto: CreateSpeakingDto) {
 		if (dto.part === 2 && !dto.topic) throw new BadRequestException("Speaking part 2 needs topic key");
@@ -37,6 +40,18 @@ export class SpeakingService {
 			})
 			.then((speaking) => {
 				return speaking;
+			})
+			.catch((error) => {
+				console.log(error);
+				throw new InternalServerErrorException(error);
+			});
+	}
+
+	public async getAll(filter: FilterDto) {
+		return await this.prismaService.speaking
+			.findMany(filter)
+			.then((speakings) => {
+				return speakings;
 			})
 			.catch((error) => {
 				console.log(error);
@@ -83,5 +98,9 @@ export class SpeakingService {
 				console.log(error);
 				throw new InternalServerErrorException(error);
 			});
+	}
+
+	public async check(file: Express.Multer.File) {
+		return await this.vertexService.speechToText(file);
 	}
 }
