@@ -5,8 +5,10 @@ import { SpeakingService } from "@modules/speaking/speaking.service";
 
 import { PrismaModule } from "@modules/prisma/prisma.module";
 
+import { VertexModule } from "@api/google/vertex/vertex.module";
+
 @Module({
-	imports: [PrismaModule],
+	imports: [PrismaModule, VertexModule],
 	controllers: [SpeakingController],
 	providers: [SpeakingService],
 })
