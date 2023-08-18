@@ -78,3 +78,16 @@ model Writing {
 
     @@map("Writings")
 }
+
+model Speaking {
+    id String @id @default(uuid())
+
+    part      Int
+    questions String[]
+    topic     String?
+
+    createdAt DateTime @default(now())
+    alteredAt DateTime @default(now()) @updatedAt()
+
+    @@map("Speakings")
+}
