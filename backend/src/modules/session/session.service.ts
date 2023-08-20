@@ -2,16 +2,19 @@ import { Injectable, InternalServerErrorException, UnauthorizedException } from 
 
 import { PrismaService } from "@modules/prisma/prisma.service";
 
+import { IpApiService } from "@api/ip-api/ipApi.service";
+
 import { CreateSessionDto, GetSessionDto, RevokeSessionDto, ValidateSessionDto } from "@modules/session/dto";
 
 @Injectable()
 export class SessionService {
 	private readonly updateDate: Date = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7);
 
-	constructor(private readonly prismaService: PrismaService) {}
+	constructor(private readonly prismaService: PrismaService, private readonly ipApiService: IpApiService) {}
 
 	public async create(dto: CreateSessionDto) {
 		dto.ip = dto.ip.replace(/[^\d.]/g, "");
+		dto.location = await this.ipApiService.location(dto.ip);
 
 		return await this.prismaService.session
 			.create({
@@ -23,6 +26,7 @@ export class SessionService {
 					},
 					ip: dto.ip,
 					device: dto.device,
+					location: dto.location,
 					expirationDate: this.updateDate,
 				},
 			})

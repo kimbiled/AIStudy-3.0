@@ -4,6 +4,7 @@ export class CreateSessionDto {
 	readonly userId: string;
 	ip: string;
 	device: string;
+	location?: string;
 }
 
 export class GetSessionDto {
