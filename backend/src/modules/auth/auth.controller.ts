@@ -25,7 +25,7 @@ export class AuthController {
 	}
 
 	@HttpCode(HttpStatus.OK)
-	@Post("/log-out")
+	@Post("/sign-out")
 	public async logOut(@Body() dto: RevokeSessionDto) {
 		return await this.authService.logOut(dto);
 	}

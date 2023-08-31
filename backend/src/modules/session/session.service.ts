@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, UnauthorizedException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from "@nestjs/common";
 
 import { PrismaService } from "@modules/prisma/prisma.service";
 
@@ -34,6 +34,7 @@ export class SessionService {
 				return session;
 			})
 			.catch((error) => {
+				console.log(error);
 				throw new InternalServerErrorException(error);
 			});
 	}
@@ -49,6 +50,7 @@ export class SessionService {
 				return session;
 			})
 			.catch((error) => {
+				console.log(error);
 				throw new InternalServerErrorException(error);
 			});
 	}
@@ -61,6 +63,7 @@ export class SessionService {
 				},
 			})
 			.catch((error) => {
+				console.log(error);
 				throw new InternalServerErrorException(error);
 			});
 	}
@@ -70,6 +73,7 @@ export class SessionService {
 			sessionId: dto.sessionId,
 		})
 			.then(async (session) => {
+				if (!session) throw new NotFoundException("Session not found");
 				if (session.device === dto.device) return session;
 
 				await this.revoke({
@@ -78,6 +82,7 @@ export class SessionService {
 				throw new UnauthorizedException("Devices are not matching");
 			})
 			.catch((error) => {
+				console.log(error);
 				throw new InternalServerErrorException(error);
 			});
 	}

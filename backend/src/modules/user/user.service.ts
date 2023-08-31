@@ -1,5 +1,4 @@
 import {
-	BadRequestException,
 	ConflictException,
 	Injectable,
 	InternalServerErrorException,
@@ -9,11 +8,12 @@ import {
 
 import { PrismaService } from "@modules/prisma/prisma.service";
 
+import { SessionService } from "@modules/session/session.service";
+
 import { StringHelper } from "@helpers/string/string.helper";
 
-import { CreateUserDto, GetUserDto, ValidateUserDto } from "@modules/user/dto";
+import { CreateUserDto, GetUserDto, UpdateUserDto, ValidateUserDto } from "@modules/user/dto";
 import { ValidateSessionDto } from "@modules/session/dto";
-import { SessionService } from "@modules/session/session.service";
 import { FilterDto } from "@root/dto";
 
 @Injectable()
@@ -28,21 +28,17 @@ export class UserService {
 		dto.username = this.stringHelper.normalizer(dto.username);
 		dto.email = this.stringHelper.normalizer(dto.email);
 
-		const exist = await this.prismaService.user.findMany({
+		const exist = await this.prismaService.user.findFirst({
 			where: {
-				username: dto.username,
-				email: dto.email,
+				OR: [{ username: dto.username }, { email: dto.email }],
 			},
 		});
-		if (exist.length > 0) throw new ConflictException("User already exist");
+		if (exist) throw new ConflictException("User already exist");
 
 		dto.password = this.stringHelper.hash(dto.password);
-		return await this.prismaService.user
+		return this.prismaService.user
 			.create({
 				data: dto,
-			})
-			.then((user) => {
-				return user;
 			})
 			.catch((error) => {
 				console.log(error);
@@ -68,15 +64,12 @@ export class UserService {
 	}
 
 	public async get(dto: GetUserDto) {
-		if (Object.keys(dto).length > 1) throw new BadRequestException("Only an username or an id is needed");
-		if (Object.keys(dto).length < 1) throw new BadRequestException("Provide at least an username or an id");
 		if (dto.username) dto.username = this.stringHelper.normalizer(dto.username);
 
-		return await this.prismaService.user
+		return this.prismaService.user
 			.findUnique({
 				where: {
 					username: dto.username,
-					id: dto.id,
 				},
 			})
 			.then((user) => {
@@ -92,19 +85,53 @@ export class UserService {
 	public async getMe(dto: ValidateSessionDto) {
 		const session = await this.sessionService.validate(dto);
 
-		return await this.get({
-			id: session.userId,
-		});
+		return this.prismaService.user
+			.findUnique({
+				where: {
+					id: session.userId,
+				},
+				include: {
+					progress: true,
+				},
+			})
+			.then((user) => {
+				delete user.password;
+				return user;
+			})
+			.catch((error) => {
+				console.log(error);
+				throw new InternalServerErrorException(error);
+			});
 	}
 
 	public async getAll(filter: FilterDto) {
-		return await this.prismaService.user
+		return this.prismaService.user
 			.findMany(filter)
 			.then((users) => {
 				for (const user of users) {
 					delete user.password;
 				}
 				return users;
+			})
+			.catch((error) => {
+				console.log(error);
+				throw new InternalServerErrorException(error);
+			});
+	}
+
+	public async update(dto: UpdateUserDto) {
+		return this.prismaService.user
+			.update({
+				where: {
+					id: dto.userId,
+				},
+				data: {
+					name: dto.name,
+				},
+			})
+			.then((user) => {
+				delete user.password;
+				return user;
 			})
 			.catch((error) => {
 				console.log(error);

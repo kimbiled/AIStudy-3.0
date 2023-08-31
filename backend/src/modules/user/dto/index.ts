@@ -20,9 +20,14 @@ export class ValidateUserDto {
 }
 
 export class GetUserDto {
-	@ApiProperty({ required: false })
-	id?: string;
+	@ApiProperty()
+	username: string;
+}
 
-	@ApiProperty({ required: false })
-	username?: string;
+export class UpdateUserDto {
+	@ApiProperty()
+	userId: string;
+
+	@ApiProperty()
+	name: string;
 }
