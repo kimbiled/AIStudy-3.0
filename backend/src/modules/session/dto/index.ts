@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateSessionDto {
 	readonly userId: string;
@@ -8,16 +9,23 @@ export class CreateSessionDto {
 }
 
 export class GetSessionDto {
+	@IsNotEmpty()
 	@ApiProperty()
 	readonly sessionId: string;
 }
 
 export class RevokeSessionDto {
+	@IsNotEmpty()
 	@ApiProperty()
 	readonly sessionId: string;
 }
 
 export class ValidateSessionDto {
+	@IsNotEmpty()
+	@ApiProperty()
 	readonly sessionId: string;
-	readonly device: string;
+
+	@IsOptional()
+	@ApiProperty({ required: false })
+	readonly device?: string;
 }

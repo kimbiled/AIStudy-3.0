@@ -2,92 +2,74 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-	provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-	provider = "postgresql"
-	url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-	id String @id @default(uuid())
+    id String @id @default(uuid())
 
-	username String @unique
-	password String
+    username String @unique
+    password String
 
-	email       String  @unique
-	emailStatus Boolean @default(false)
+    email       String  @unique
+    emailStatus Boolean @default(false)
 
-	name String?
+    name String?
 
-	progress Progress?
+    sessions Session[]
 
-	sessions Session[]
+    createdAt DateTime @default(now())
+    alteredAt DateTime @default(now()) @updatedAt()
 
-	createdAt DateTime @default(now())
-	alteredAt DateTime @default(now()) @updatedAt()
-
-	@@map("Users")
+    @@map("Users")
 }
 
 model Session {
-	id String @id @default(uuid())
+    id String @id @default(uuid())
 
-	ip       String
-	device   String
-	location String
+    ip       String
+    device   String
+    location String
 
-	expirationDate DateTime
+    expirationDate DateTime
 
-	user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-	userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
 
-	createdAt DateTime @default(now())
-	alteredAt DateTime @default(now()) @updatedAt()
+    createdAt DateTime @default(now())
+    alteredAt DateTime @default(now()) @updatedAt()
 
-	@@map("Sessions")
-}
-
-model Progress {
-	id String @id @default(uuid())
-
-	date      DateTime?
-	current   Float?
-	expecting Float?
-
-	user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-	userId String @unique
-
-	createdAt DateTime @default(now())
-	alteredAt DateTime @default(now()) @updatedAt()
-
-	@@map("Progresses")
+    @@map("Sessions")
 }
 
 model Writing {
-	id String @id @default(uuid())
+    id String @id @default(uuid())
 
-	type  Int
-	topic String
+    type  Int
+    topic String
 
-	imagePath String?
+    imagePath String?
 
-	createdAt DateTime @default(now())
-	alteredAt DateTime @default(now()) @updatedAt()
+    createdAt DateTime @default(now())
+    alteredAt DateTime @default(now()) @updatedAt()
 
-	@@map("Writings")
+    @@map("Writings")
 }
 
 model Speaking {
-	id String @id @default(uuid())
+    id String @id @default(uuid())
 
-	part      Int
-	questions String[]
-	topic     String?
+    part      Int
+    questions String[]
+    topic     String?
 
-	createdAt DateTime @default(now())
-	alteredAt DateTime @default(now()) @updatedAt()
+    createdAt DateTime @default(now())
+    alteredAt DateTime @default(now()) @updatedAt()
 
-	@@map("Speakings")
+    @@map("Speakings")
 }

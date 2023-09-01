@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 
 import { PrismaService } from "@modules/prisma/prisma.service";
 
@@ -17,9 +17,7 @@ export class WritingService {
 	) {}
 
 	public async create(dto: CreateWritingDto, file?: Express.Multer.File) {
-		if (dto.type === 1) {
-			dto.path = await this.storageService.upload(file, "writing");
-		}
+		if (dto.type === 1) dto.path = await this.storageService.upload(file, "writing");
 
 		return await this.prismaService.writing
 			.create({
@@ -37,7 +35,11 @@ export class WritingService {
 	public async check(dto: CheckWritingDto) {
 		const writing = await this.get({
 			writingId: dto.writingId,
+		}).then((writing) => {
+			if (!writing) throw new NotFoundException("Writing not found");
+			return writing;
 		});
+		dto.content += `\nTopic: ${writing.topic}`;
 
 		return await this.vertexService.chat(dto.content);
 	}

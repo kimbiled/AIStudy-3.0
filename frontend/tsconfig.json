@@ -14,7 +14,7 @@
 		"jsx": "preserve",
 		"incremental": true,
 		"plugins": [{ "name": "next" }],
-		"baseUrl": "./",
+		"baseUrl": "./src",
 		"paths": {
 			"@root/*": ["./*"],
 			"@assets/*": ["./assets/*"],

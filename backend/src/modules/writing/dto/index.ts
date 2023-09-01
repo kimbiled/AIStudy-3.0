@@ -16,7 +16,7 @@ export class CheckWritingDto {
 	readonly writingId: string;
 
 	@ApiProperty()
-	readonly content: string;
+	content: string;
 }
 
 export class GetWritingDto {
