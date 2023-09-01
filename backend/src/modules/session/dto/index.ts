@@ -18,6 +18,9 @@ export class RevokeSessionDto {
 }
 
 export class ValidateSessionDto {
+	@ApiProperty()
 	readonly sessionId: string;
-	readonly device: string;
+
+	@ApiProperty({ required: false })
+	readonly device?: string;
 }
