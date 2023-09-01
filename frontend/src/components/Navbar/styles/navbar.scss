@@ -1,0 +1,31 @@
+@import "@assets/styles/mixins";
+
+.navbar {
+	@include flex(row, normal, center, 15px);
+	transition: all var(--animation-normal) ease;
+
+	@media (max-width: 1100px) {
+		position: absolute;
+		@include flex(column, center, center, 10px);
+		background-color: #fefefe;
+		z-index: 100;
+		top: 0;
+		left: -100%;
+		width: 60vw;
+		height: 100vh;
+	}
+
+	&.active {
+		left: 0;
+	}
+
+	&__link {
+		color: #444;
+		font-size: 20px;
+		font-weight: 500;
+
+		&.active {
+			color: #888;
+		}
+	}
+}

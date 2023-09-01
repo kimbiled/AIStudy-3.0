@@ -1,0 +1,54 @@
+@import "@assets/styles/mixins";
+
+.header {
+	width: 100%;
+	padding: 15px 0;
+	@include flex(row, space-between, center, 10px);
+
+	// .header__logo
+	&__logo {
+		color: #558ac9;
+		font-size: 32px;
+		font-weight: 900;
+		letter-spacing: 1.28px;
+		text-transform: uppercase;
+		width: fit-content;
+
+		&::after {
+			content: "STUDY";
+			color: #97c05c;
+			font-size: 32px;
+			font-weight: 900;
+			letter-spacing: 1.28px;
+		}
+	}
+
+	// .header__nav
+	&__nav {
+		@include flex(row, normal, center, 15px);
+	}
+
+	&__nav-link {
+		color: #444;
+		font-size: 20px;
+		font-weight: 500;
+
+		@media (max-width: 480px) {
+			&:first-child {
+				display: none;
+			}
+		}
+
+		&.active {
+			color: #888;
+		}
+	}
+
+	// .header__profile
+	&__profile {
+	}
+
+	// .header__profile-username
+	&__profile-username {
+	}
+}

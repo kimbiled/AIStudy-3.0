@@ -21,8 +21,6 @@ model User {
 
     name String?
 
-    progress Progress?
-
     sessions Session[]
 
     createdAt DateTime @default(now())
@@ -47,22 +45,6 @@ model Session {
     alteredAt DateTime @default(now()) @updatedAt()
 
     @@map("Sessions")
-}
-
-model Progress {
-    id String @id @default(uuid())
-
-    date      DateTime?
-    current   Float?
-    expecting Float?
-
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @unique
-
-    createdAt DateTime @default(now())
-    alteredAt DateTime @default(now()) @updatedAt()
-
-    @@map("Progresses")
 }
 
 model Writing {
