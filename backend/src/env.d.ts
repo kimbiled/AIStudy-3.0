@@ -6,10 +6,11 @@ declare global {
 			readonly GOOGLE_PROJECT_ID: string;
 			readonly GOOGLE_KEY_FILE: string;
 			readonly GOOGLE_ROOT_EMAIL: string;
-			readonly GOOGLE_ROOT_CLIENT_ID: string;
-			readonly GOOGLE_ROOT_CLIENT_SECRET: string;
-			readonly GOOGLE_ROOT_REDIRECT_URI: string;
-			readonly GOOGLE_ROOT_REFRESH_TOKEN: string;
+			readonly GOOGLE_CLIENT_ID: string;
+			readonly GOOGLE_CLIENT_SECRET: string;
+			readonly GOOGLE_REDIRECT_URI: string;
+			readonly GOOGLE_REFRESH_TOKEN: string;
+			readonly GOOGLE_AUTHORIZATION_CODE: string;
 
 			readonly GOOGLE_STORAGE_BUCKET_NAME: string;
 

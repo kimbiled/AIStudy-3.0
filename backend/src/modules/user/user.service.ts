@@ -90,9 +90,6 @@ export class UserService {
 				where: {
 					id: session.userId,
 				},
-				include: {
-					progress: true,
-				},
 			})
 			.then((user) => {
 				delete user.password;
