@@ -58,3 +58,13 @@ input {
 	@include reset();
 	font-family: var(--main-font);
 }
+
+.btn {
+	border-radius: 15px;
+background: #383838;
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 55px;
+	color: #FDFDFD;
+	padding: 4px 120px;
+}
