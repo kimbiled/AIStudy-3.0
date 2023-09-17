@@ -1,0 +1,357 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "@assets/styles/mixins";
+
+.home {
+    padding-top: 232px;
+    text-align: center;
+
+// ---------------SCREEN---------------------
+    &__screen {
+        background: url('../imgs/bg.png') no-repeat center;
+        color: #FDFDFD;
+        max-width: 755px;
+        margin: 0 auto;
+        margin-bottom: 209px;
+        
+            &-title {
+                font-size: 70px;
+                font-weight: 700;
+                line-height: 110%; /* 77px */
+                letter-spacing: 2.1px;
+                margin-bottom: 29px;
+
+                @media (max-width: 480px) {
+                    font-size: 55px;
+                }
+            }
+
+            &-desc {
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 1.1;
+                margin-bottom: 40px;
+
+                @media (max-width: 480px) {
+                    font-size: 24px;
+                }
+            }
+    }
+
+// ---------------MOCK-----------------------
+    &__mock {
+        color: #444;
+        font-weight: 700;
+        background-color: #FDFDFD;
+        border-radius: 25px;
+        padding: 45px 0;
+        margin-bottom: 130px;
+
+        &-title {
+            font-size: 55px;
+            line-height: 105%;
+            margin-bottom: 10px;
+
+            @media (max-width: 480px) {
+                font-size: 42px;
+            }
+        }
+    
+        &-desc {
+            font-size: 30px;
+            line-height: 110%;
+            margin-bottom: 50px;
+    
+            span {
+                text-decoration-line: underline;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 24px;
+                margin-bottom: 35px;
+            }
+        }
+    
+        &-btns {
+            display: flex;
+            margin-bottom: 50px;
+            justify-content: center;
+            gap: 44px;
+            flex-wrap: wrap;
+
+            @media (max-width: 480px) {
+                gap: 22px;
+                margin-bottom: 35px;
+            }
+        }
+    
+        &-btn {
+            padding: 15px 0;
+            width: 285px;
+            background: #558AC9;
+            color: #FDFDFD;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 110%;
+            border-radius: 45px;
+        }
+
+    }
+
+// ------------------INFO----------------------
+    &__info {
+        padding: 98px 78px;
+        color: #444;
+        background-color: #FDFDFD;
+        border-radius: 25px;
+        margin-bottom: 127px;
+        
+        @media (max-width: 480px) {
+            padding: 60px 30px;
+        }
+
+        &-title {
+            font-size: 50px;
+            font-weight: 700;
+            line-height: 110%;
+            margin-bottom: 30px;
+
+            @media (max-width: 480px) {
+                font-size: 30px;
+
+            }
+        }
+    
+        &-desc {
+            font-size: 25px;
+            line-height: 110%;
+            font-weight: 500;
+            max-width: 850px;
+            margin: 0 auto;
+            margin-bottom: 70px;
+
+            @media (max-width: 480px) {
+                font-size: 24px;
+                
+            }
+        }
+    
+        &-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap:71px;
+            margin-bottom: 156px;
+
+            @media (max-width: 480px) {
+                margin-bottom: 70px;
+            }
+        }
+    
+        &-benefit {
+            flex:40%;
+            padding: 84px 55px;
+            background: #558AC9;
+            color: #FDFDFD;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 110%;
+            border-radius: 45px;
+
+            @media (max-width: 480px) {
+                line-height: normal;
+
+                padding: 40px 30px;
+            }
+        }
+    
+        &-subtitle {
+            font-size: 45px;
+            font-weight: 600;
+            margin-bottom: 40px;
+
+            @media (max-width: 480px) {
+                font-size: 34px;
+            }
+        }
+    
+        &-subdesc {
+            font-size: 24px;
+            font-weight: 400;
+
+            @media (max-width: 480px) {
+                font-size: 20px;
+            }
+        }
+
+        &-details {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 85px;
+
+            @media (max-width: 480px) {
+                margin-bottom: 60px;
+            }
+        }
+
+        &-detail {
+           flex: 30%;
+           padding: 0 44px;
+           border-right: 2px rgba(68, 68, 68, 0.80) solid;
+           &:last-child {
+            border-right: 0;
+            }
+
+            @media (max-width: 768px) {
+                border: 0;
+            }
+        }
+    
+        &-btn {
+            padding: 0 32px;
+
+            @media (max-width: 480px) {
+                padding: 0 24px;
+            }
+        }
+    }
+
+    &__detail {
+        &-img {
+           
+        }
+
+        &-title {
+            font-size: 27px;
+            font-weight: 700;
+            line-height: 110%;
+            margin-bottom: 10px;
+        }
+
+        &-desc {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 110%;
+        }
+    }
+
+
+// ------------------FAQ-----------------
+    &__faq {
+        &-title {
+            color: #444;
+            font-size: 55px;
+            font-weight: 700;
+            margin-bottom: 37px;
+        }
+
+        &-section {
+           position: relative;
+           align-items: center;
+           text-align: left;
+           display: flex;
+           flex-direction: row-reverse;
+
+           @media (max-width: 1200px) {
+            display: block;
+            margin: 0 auto;
+       }
+        }
+
+        &-questions {
+           position: absolute;
+           left: 0;
+           border-radius: 15px;
+           list-style-type: none;
+           background: #FDFDFD;
+           align-items: center;
+
+           @media (max-width: 1200px) {
+                position: relative;
+                max-width: 700px;
+                // margin: 0 auto;
+                margin-bottom: 40px;
+           }
+        }
+
+        &-question {
+            padding: 20px 40px 20px 60px;
+            border-bottom: 2px solid #CECECE;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 130%; 
+            color: #444;
+            position: relative;
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            &:before {
+                content: "";
+                position: absolute;
+                width: 17px;
+                height: 17px;
+                border-radius: 100%;
+                background: #444;
+                left: 25px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            @media (max-width:480px) {
+                font-size: 22px;
+            }
+        }
+
+
+        &-answers {
+            background: #558AC9;
+            color: #FDFDFD;
+            max-width: 600px;
+            padding: 75px 65px 80px 155px;
+            border-radius: 15px;
+
+            @media (max-width: 1200px) {
+                margin: 0 auto;
+                padding: 80px;
+                float: right;
+            }
+
+            @media (max-width: 480px) {
+                padding: 40px;
+            }
+
+        }
+
+        &-topic {
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%; 
+            margin-bottom: 29px;
+
+            @media (max-width: 480px) {
+                font-size: 24px;
+            }
+        }
+
+        &-answer {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 130%;
+
+            @media (max-width: 480px) {
+                font-size: 18px;
+            }
+          }
+          
+         
+    }
+
+    
+
+}
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
