@@ -1,34 +1,36 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import "@assets/styles/mixins";
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import '@assets/styles/mixins';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
-	--main-color: ;
+  --main-color: ;
 
-	--bg-color: #eae9e6;
+  --bg-color: #eae9e6;
 
-	--main-font: "Lato", sans-serif;
+  --main-font: 'Lato', sans-serif;
 
-	--animation-fast: 0.3s;
-	--animation-normal: 0.5s;
-	--animation-slow: 0.7s;
+  --animation-fast: 0.3s;
+  --animation-normal: 0.5s;
+  --animation-slow: 0.7s;
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-	background-color: var(--bg-color);
-	@include flex(column, normal, normal, 0);
+  background-color: var(--bg-color);
+  @include flex(column, normal, normal, 0);
 }
 
 body {
-	min-height: 100vh;
-	width: 90%;
-	margin: 0 auto !important;
-	@include flex(column, normal, normal, 0);
+  min-height: 100vh;
+  width: 90%;
+  margin: 0 auto !important;
+  @include flex(column, normal, normal, 0);
 }
 
 h1,
@@ -40,21 +42,31 @@ h6,
 p,
 label,
 li {
-	cursor: default;
-	font-family: var(--main-font);
+  cursor: default;
+  font-family: var(--main-font);
 }
 
 a {
-	text-decoration: none;
-	font-family: var(--main-font);
+  text-decoration: none;
+  font-family: var(--main-font);
 }
 
 button {
-	@include reset();
-	font-family: var(--main-font);
+  @include reset();
+  font-family: var(--main-font);
 }
 
 input {
-	@include reset();
-	font-family: var(--main-font);
+  @include reset();
+  font-family: var(--main-font);
+}
+
+.btn {
+	border-radius: 15px;
+background: #383838;
+	font-size: 25px;
+	font-weight: 700;
+	line-height: 55px;
+	color: #FDFDFD;
+	padding: 4px 120px;
 }
