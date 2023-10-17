@@ -2,24 +2,32 @@
 @import "@assets/styles/mixins";
 
 .home {
-    padding-top: 232px;
+
     text-align: center;
 
 // ---------------SCREEN---------------------
     &__screen {
-        background: url('../imgs/bg.png') no-repeat center;
         color: #FDFDFD;
-        max-width: 755px;
-        margin: 0 auto;
-        margin-bottom: 209px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 35px;;
+        height: 100vh;
         
+            &-info{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 65%;
+
+            }
             &-title {
                 font-size: 70px;
                 font-weight: 700;
-                line-height: 110%; /* 77px */
+                line-height: 110%;
                 letter-spacing: 2.1px;
-                margin-bottom: 29px;
-
                 @media (max-width: 480px) {
                     font-size: 55px;
                 }
@@ -29,11 +37,27 @@
                 font-size: 28px;
                 font-weight: 600;
                 line-height: 1.1;
-                margin-bottom: 40px;
 
                 @media (max-width: 480px) {
                     font-size: 24px;
                 }
+            }
+
+            &-btn{
+                border-radius: 15px;
+                width: auto;
+                height: 60px;
+                background: #383838;
+                font-size: 25px;
+                font-weight: 700;
+                line-height: 55px;
+                color: #FDFDFD;
+                padding: 4px 120px;
+            }
+
+            &-btn:hover{
+                background: #292929;
+                transition: all 0.3s ease-in-out;
             }
     }
 
@@ -45,6 +69,41 @@
         border-radius: 25px;
         padding: 45px 0;
         margin-bottom: 130px;
+        z-index: 0;
+        position: relative;
+
+        &-login{
+            display: flex;
+            width: 240px;
+            height: 60px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 10px;
+            border-radius: 15px;
+            border: 1px solid #558AC9;
+            background: #444;
+            color: #FDFDFD;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        &-login:hover{
+            background: rgb(32, 32, 32);
+            transition: all 0.3s ease-in-out;
+        }
+
+        &-info{
+            width: 545px;
+            height: 95px;
+            border-radius: 130px 130px 130px 130px;
+            background: #444;
+            z-index: 10;
+            position: absolute;
+            top:-50px;
+            right: -100px;
+        }
 
         &-title {
             font-size: 55px;
@@ -78,9 +137,10 @@
             gap: 44px;
             flex-wrap: wrap;
 
-            @media (max-width: 480px) {
-                gap: 22px;
-                margin-bottom: 35px;
+            @media (min-width:320px) and (max-width: 629px) {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
             }
         }
     
@@ -93,6 +153,10 @@
             font-weight: 700;
             line-height: 110%;
             border-radius: 45px;
+            @media (min-width:320px) and (max-width: 629px) {
+                width: 190px;
+                font-size: 22px;
+            }
         }
 
     }
@@ -205,19 +269,39 @@
                 border: 0;
             }
         }
-    
-        &-btn {
-            padding: 0 32px;
 
+        &-signup{
+            display: flex;
+            width: 320px;
+            height: 60px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 10px;
+            border-radius: 15px;
+            border: 1px solid #558AC9;
+            background: #444;
+            color: #FDFDFD;
+            font-size: 24px;
+            font-weight: 700;
             @media (max-width: 480px) {
                 padding: 0 24px;
             }
         }
+        &-signup:hover{
+            background: rgb(32, 32, 32);
+            transition: all 0.3s ease-in-out;
+        }
+        
     }
 
     &__detail {
         &-img {
-           
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60%;
         }
 
         &-title {
@@ -346,9 +430,6 @@
           
          
     }
-
-    
-
 }
 
 .container {

@@ -1,10 +1,25 @@
 @import "@assets/styles/mixins";
 
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
 .header {
-	width: 100%;
 	padding: 15px 0;
 	@include flex(row, space-between, center, 10px);
-
+	height: 5.5rem;
+	background-color: #FDFDFD;
+	
+	@media (max-width:1440px) {
+		@include flex(row, space-between, center, 10px);
+	}
+	@media (max-width:1180px) {
+		@include flex(row, space-around, center, 0);
+	}
+	@media (min-width:1040px) and (max-width:1180px) {
+		@include flex(row, space-around, center, 0);
+	}
 	// .header__logo
 	&__logo {
 		color: #558ac9;
@@ -25,13 +40,20 @@
 
 	// .header__nav
 	&__nav {
-		@include flex(row, normal, center, 15px);
+		@include flex(row, normal, right, 15px);
 	}
 
 	&__nav-link {
-		color: #444;
-		font-size: 20px;
-		font-weight: 500;
+
+		color: #ffffff;
+		font-weight: 700;
+		width:130px;
+		height: 35px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 10px;
+		background: #444;
 
 		@media (max-width: 480px) {
 			&:first-child {

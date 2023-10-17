@@ -1,7 +1,7 @@
 @import "@assets/styles/mixins";
 
 .navbar {
-	@include flex(row, normal, center, 15px);
+	@include flex(row, normal, center, 20px);
 	transition: all var(--animation-normal) ease;
 
 	@media (max-width: 1100px) {
@@ -23,7 +23,6 @@
 		color: #444;
 		font-size: 20px;
 		font-weight: 500;
-
 		&.active {
 			color: #888;
 		}

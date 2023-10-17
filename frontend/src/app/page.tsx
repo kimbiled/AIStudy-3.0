@@ -1,7 +1,13 @@
 import Layout from "@components/Layout/Layout";
+import FAQ from "@components/FAQ/FAQ";
+import NavLink from "@ui/NavLink/NavLink";
 import { homedir } from "os";
+import {diary, camera, paper} from '../assets/icons/index';
+import {hero} from '../assets/imgs/index';
+import Image from 'next/image'
 
 import "../assets/styles/home.scss";
+
 export default function page() {
    return (
       <Layout>
@@ -9,26 +15,51 @@ export default function page() {
             <section className="home">
                <div className="container">
                   <div className="home__screen">
-                     <h2 className="home__screen-title">
-                        Подготовка к IELTS в легкой форме
-                     </h2>
-                     <p className="home__screen-desc">
-                        Используя новый подход к обучению c ИИ и игровыми
-                        режимами, вы сможете получить желаемый балл
-                     </p>
-                     <button className="btn home__screen-btn">Начать</button>
+                     <div style={{zIndex: -1, position:"absolute", width:"100vw", height:"100vh", top:"0", left:"0"}}>
+                        <Image src={hero} alt="hero-img" layout="fill" objectFit="cover" quality={100}/>
+                     </div>
+                     <div className="home__screen-info">
+                        <h2 className="home__screen-title">
+                           Подготовка к IELTS в легкой форме
+                        </h2>
+                        <p className="home__screen-desc">
+                           Используя новый подход к обучению c ИИ и игровыми
+                           режимами, вы сможете получить желаемый балл
+                        </p>
+                     </div>
+
+                        <NavLink
+                           href={{
+                              pathname: "/auth/sign-in",
+                           }}
+                        className={"home__screen-btn"}
+                        >
+                           Начать
+                        </NavLink>
                   </div>
 
-                  <div className="home__mock">
+                  <div className="home__mock" >
+                     <div className="home__mock-info">
+                        <p className="text-xl font-semibold text-white text-right flex justify-center items-center w-96 m-auto p-4">Узнай свой уровень прямо сейчас, пройдя пробный тест!</p>
+                     </div>
+
                      <h3 className="home__mock-title">Mock Test</h3>
                      <p className="home__mock-desc">
                         <span>Бесплатный</span> пробный тест по главным секциям
                      </p>
+
                      <div className="home__mock-btns">
-                        <button className="home__mock-btn">Writing</button>
-                        <button className="home__mock-btn">Speaking</button>
+                        <div className="home__mock-btn">Writing</div>
+                        <div className="home__mock-btn">Speaking</div>
                      </div>
-                     <button className="btn">Начать</button>
+                        <NavLink
+                           href={{
+                              pathname: "/auth/sign-in",
+                           }}
+                           className="home__mock-login"
+                        >
+                           Начать
+                        </NavLink>
                   </div>
 
                   <div className="home__info">
@@ -70,7 +101,9 @@ export default function page() {
 
                      <div className="home__info-details">
                         <div className="home__info-detail">
-                           <img className="home__detail-img" />
+                           <div className="home__detail-img">
+                              <Image src={camera} alt="camera-icon" />
+                           </div>
                            <div className="home__detail-title">
                               Мастер - классы
                            </div>
@@ -80,7 +113,9 @@ export default function page() {
                            </div>
                         </div>
                         <div className="home__info-detail">
-                           <img className="home__detail-img" />
+                           <div className="home__detail-img">
+                              <Image src={diary} alt="camera-icon" />
+                           </div>
                            <div className="home__detail-title">Mock Тесты</div>
                            <div className="home__detail-desc">
                               Бесплатные пробные тестирования для оценки ваших
@@ -88,7 +123,9 @@ export default function page() {
                            </div>
                         </div>
                         <div className="home__info-detail">
-                           <img className="home__detail-img" />
+                           <div className="home__detail-img">
+                              <Image src={paper} alt="camera-icon" />
+                           </div>
                            <div className="home__detail-title">Ресурсы</div>
                            <div className="home__detail-desc">
                               Дополнительные источники для самостоятельной
@@ -98,52 +135,17 @@ export default function page() {
                         </div>
                      </div>
 
-                     <button className="btn home__info-btn">
-                        Зарегестрироваться
-                     </button>
+                     <NavLink
+                           href={{
+                              pathname: "/auth/sign-up",
+                           }}
+                        className="home__info-signup"
+                        >
+                           Зарегестрироваться
+                        </NavLink>
                   </div>
 
-                  <div className="home__faq">
-                     <div className="home__faq-title">
-                        Часто задаваемые вопросы
-                     </div>
-
-                     <div className="home__faq-section">
-                        <ul className="home__faq-questions">
-                           <li className="home__faq-question">
-                              Как я могу связаться со службой поддержки
-                              клиентов?
-                           </li>
-                           <li className="home__faq-question">
-                              Защищены ли мои личные данные при использовании?
-                           </li>
-                           <li className="home__faq-question">
-                              Точно ли ИИ оценивает мои навыки письма и
-                              говорения?
-                           </li>
-                           <li className="home__faq-question">
-                              Какие конкретные функции мне предлагает ИИ?
-                           </li>
-                           <li className="home__faq-question">
-                              Как работает сервис подготовки на базе ИИ?
-                           </li>
-                        </ul>
-
-                        <div className="home__faq-answers">
-                           <div className="home__faq-topic">
-                              Точно ли ИИ оценивает мои навыки письма и
-                              говорения?
-                           </div>
-                           <div className="home__faq-answer">
-                              Да! Наш ИИ натренирован на широкой базе пробных и
-                              реальных тестов. Также, мы проводили тестирование
-                              и сравнение с оценками учителей и выявили что ИИ
-                              определяет те же ошибки и разбирает их, что делает
-                              оценку точной и надежной.
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  <FAQ />
                </div>
             </section>
          }

@@ -1,19 +1,15 @@
 'use client';
+import 'regenerator-runtime/runtime'
 import { useState } from 'react';
 import Layout from "@components/Layout/Layout";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import Image from 'next/image';
-import { check } from '@root/assets/icons';
+import { microOff, microOn } from '@root/assets/icons';
 
-
-const WritingPractice = () => {
+const SpeakingPractice = () => {
   const [prompt, setPrompt] = useState<string>('');
-  const [essayText, setEssayText] = useState<string>('');
   const [res, setRes] = useState<string>('');
   const [resArr, setResArr] = useState<string[]>([]);
-
-  /*word counting in textArea*/
-  const [text, setText] = useState('');
-  const [wordCount, setWordCount] = useState(0);
 
   const styles = {
     boxWidth: 'xl:max-w-[1280px] w-full',
@@ -33,40 +29,41 @@ const WritingPractice = () => {
     marginX: 'sm:mx-16 mx-6',
     marginY: 'sm:my-16 my-6',
   };
-  const handleClick = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent form submission
+  // const handleClick = async (e: React.FormEvent) => {
+  //   e.preventDefault(); // Prevent form submission
 
-    if (!essayText) {
-      setRes('Enter essay');
-      return;
-    }
+  //   if (!essayText) {
+  //     setRes('Enter essay');
+  //     return;
+  //   }
 
-    const response = await fetch('http://127.0.0.1:8000/api/essay/check', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt: prompt,
-        text: essayText,
-      }),
-    });
+  //   const response = await fetch('http://127.0.0.1:8000/api/speaking/check', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       prompt: prompt,
+  //       text: essayText,
+  //     }),
+  //   });
 
-    const data = await response.json();
-    setRes(data.data);
+  //   const data = await response.json();
+  //   setRes(data.data);
 
-    setResArr(res.split('--'));
-  };
+  //   setResArr(res.split('--'));
+  // };
+ 
+  /*Dictophone*/
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
 
-  const handleTextChange = (event:any) => {
-    const value = event.target.value;
-    setText(value);
-    setWordCount(value.trim().split(/\s+/).length);
-  };
-
-  const handleText = (e:any) =>{
-    handleTextChange(e);
-    setEssayText(e.target.value);
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
   }
 
   return (
@@ -74,7 +71,7 @@ const WritingPractice = () => {
       {
         <section className="w-full overflow-hidden mb-10 font-lato flex flex-col gap-4 justify-around items-center">
           <div className="flex flex-col gap-4 text-center mt-12">
-              <h1 className="text-[#444] text-5xl font-semibold">Writing</h1>
+              <h1 className="text-[#444] text-5xl font-semibold">Speaking</h1>
               <h3 className="text-[#444] opacity-80 text-2xl font-semibold">Учебные материалы</h3>
           </div>
         <div className={` ${styles.paddingX} space-y-5`}>
@@ -92,33 +89,43 @@ const WritingPractice = () => {
               onChange={e => setPrompt(e.target.value)}
             />
           </div>
+
+          <div className='w-[465px] h-24 rounded-2xl bg-[#444] flex items-center justify-center gap-4'>
+            <p></p>
+            <button onClick={() => {
+              console.log(13)
+                listening ?  SpeechRecognition.startListening() : SpeechRecognition.stopListening()
+              }} type="button">
+              <Image src={listening ? microOn : microOff} alt='micro-on-icon'/>
+            </button>
+            {/* {listening? 
+            (
+              <Image src={microOn} alt='micro-on-icon' onClick={SpeechRecognition.startListening}/>
+            ) : 
+            (
+              <Image src={microOff} alt='micro-off-icon' onClick={SpeechRecognition.stopListening}/>
+            )
+            } */}
+
+            <button className="w-24 h-9 rounded-2xl bg-white" onClick={resetTranscript}>Reset</button>
+
+          </div>
   
           <div className="lg:flex lg:flex-row space-y-10 lg:space-y-0 flex-col lg:space-x-20 ">
-            <form onSubmit={handleClick}>
-              <div className="w-full mb-4 border-[1px] border-[#C0C0C0] rounded-2xl bg-white h-[400px]">
+            <form>
+              <div className="w-[720px] mb-4 border-[1px] border-[#C0C0C0] rounded-2xl bg-white h-[400px]">
                 <div className="px-4 py-2 bg-white rounded-2xl">
-                  <textarea
-                    id="editor"
-                    className=" max-w-[640px] lg:w-[640px] h-[300px] block px-0 text-sm text-gray-800 bg-white border-0 resize-none	outline-none p-2"
-                    placeholder="Write ..."
-                    required
-                    onChange={e => handleText(e)}
-                    value={text} ></textarea>
+                    <p className="block px-0 text-sm text-gray-800 p-2">
+                        {transcript}
+                    </p>
                 </div>
               </div>
-              <div className='flex flex-row justify-between'>
-                <div className='flex flex-row justify-center items-center gap-2'>
-                    <Image src={check} alt="checked-icon" />
-                    <span className='text-sm text-[#444444]'>{wordCount}</span>
-                    <span className='text-sm text-[#444444]'> / 350</span>
-                </div>
-                <div>
+              <div className='flex flex-row justify-end'>
                   <button
                     type="submit"
                     className="inline-flex items-center px-5 py-3 text-xl lg:px-10 lg:py-3 lg:text-lg font-semibold text-center bg-[#444] rounded-2xl text-white focus:ring-4 focus:ring-blue-200 ">
                     Загрузить
                   </button>
-                </div>
               </div>
             </form>
   
@@ -180,4 +187,4 @@ const WritingPractice = () => {
   );
 };
 
-export default WritingPractice;
+export default SpeakingPractice;

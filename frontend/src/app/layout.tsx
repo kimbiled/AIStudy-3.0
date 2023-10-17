@@ -1,8 +1,9 @@
 import { type ReactNode } from 'react';
-import { type Metadata } from 'next';
+import { type ServerRuntime, type Metadata } from 'next';
 
 import '@assets/styles/default.scss';
-import Header from '@root/components/Header/Header';
+
+export const runtime: ServerRuntime = "nodejs"
 
 export const metadata: Metadata = {
   title: 'AIStudy',

@@ -6,6 +6,8 @@ import { WritingModule } from "@modules/writing/writing.module";
 import { SpeakingModule } from "@modules/speaking/speaking.module";
 
 @Module({
-	imports: [UserModule, AuthModule, WritingModule, SpeakingModule],
+	imports: [UserModule, AuthModule, 
+		//WritingModule, SpeakingModule
+	],
 })
 export class AppModule {}

@@ -1,0 +1,100 @@
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+.footer{
+    width: 100vw;
+    height: 40vh;
+    background: #1F1F1F;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (min-width:1280px) and (max-width:1440px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (min-width:1080px) and (max-width:1279px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    @media (min-width:320px) and (max-width:849px) {
+        display: flex;
+        flex-direction: column;
+        height: 60vh;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    &__icons{
+        width:260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap:10px;
+
+        &-logo {
+            color: #558ac9;
+            font-size: 56px;
+            font-weight: 900;
+            letter-spacing: 1.28px;
+            text-transform: uppercase;
+            width: fit-content;
+        
+            &::after {
+                content: "STUDY";
+                color: #97c05c;
+                font-size: 56px;
+                font-weight: 900;
+                letter-spacing: 1.28px;
+                }
+            }
+        &-media{
+            width: 180px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            @media (min-width:320px) and (max-width:849px) {
+                justify-content: space-between;
+                width: 180px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__navigation{
+        display: flex;
+        flex-direction: row;
+        color:white;
+        font-weight: 600;
+        width:500px;
+        justify-content: space-between;
+        @media (min-width:1180px) and (max-width:1440px) {
+            justify-content: space-evenly;
+        }
+        @media (min-width:1080px) and (max-width:1279px) {
+            justify-content: space-evenly;
+        }
+        @media (min-width:850px) and (max-width:1079px) {
+            justify-content: space-evenly;
+        }
+        @media (min-width:320px) and (max-width:849px) {
+            flex-direction: column;
+            text-align: center;
+            gap: 25px;
+        }
+        &-list{
+            cursor: pointer;
+            color: #FDFDFD;
+            font-size: 18px;
+            &-first{
+                cursor: default;
+                color: #558AC9;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

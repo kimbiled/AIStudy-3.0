@@ -12,35 +12,29 @@ export default function Header() {
 
 	return (
 		<header className="header">
-			<h1 className="header__logo">ai</h1>
-			<Navbar isActive={showNav} />
-			<div className="header__nav">
-				<NavLink
-					href={{
-						pathname: "/auth/sign-up",
+			<div className="container header">
+				<h1 className="header__logo">ai</h1>
+				<Navbar isActive={showNav}/>
+				<div className="header__nav">
+					<NavLink
+						href={{
+							pathname: "/auth/sign-in",
+						}}
+						className={"header__nav-link"}
+					>
+						Войти
+					</NavLink>
+				</div>
+				<div
+					className="header__profile"
+					style={{
+						display: "none", // temporary decision
 					}}
-					className={"header__nav-link"}
 				>
-					Регистрация
-				</NavLink>
-				<NavLink
-					href={{
-						pathname: "/auth/sign-in",
-					}}
-					className={"header__nav-link"}
-				>
-					Логин
-				</NavLink>
+					<p className="header__profile-username">username</p>
+				</div>
+				<Burger showBurger={showNav} setShowBurger={setShowNav} />
 			</div>
-			<div
-				className="header__profile"
-				style={{
-					display: "none", // temporary decision
-				}}
-			>
-				<p className="header__profile-username">username</p>
-			</div>
-			<Burger showBurger={showNav} setShowBurger={setShowNav} />
 		</header>
 	);
 }
